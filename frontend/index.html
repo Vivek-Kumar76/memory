@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In Loving Memory</title>
+<meta name="description" content="Share your notes and photos in loving memory.">
+<meta name="theme-color" content="#f6f0e3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:wght@500;600&family=Kalam:wght@300;400&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to notes</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="branch" viewBox="0 0 170 110">
+      <path d="M4 8 C50 14 95 40 160 96" fill="none" stroke="#6b5a3c" stroke-width="2.5" stroke-linecap="round"/>
+      <g fill="#55703f">
+        <ellipse cx="28" cy="30" rx="16" ry="7" transform="rotate(35 28 30)"/>
+        <ellipse cx="62" cy="38" rx="17" ry="7" transform="rotate(40 62 38)"/>
+        <ellipse cx="96" cy="58" rx="17" ry="7" transform="rotate(50 96 58)"/>
+        <ellipse cx="132" cy="82" rx="15" ry="6.5" transform="rotate(55 132 82)"/>
+      </g>
+      <g fill="#6f8a55">
+        <ellipse cx="46" cy="10" rx="16" ry="7" transform="rotate(-30 46 10)"/>
+        <ellipse cx="82" cy="24" rx="16" ry="7" transform="rotate(-25 82 24)"/>
+        <ellipse cx="120" cy="52" rx="15" ry="6.5" transform="rotate(-10 120 52)"/>
+      </g>
+      <g fill="#fffaf0" stroke="#d9c9a3" stroke-width="1">
+        <circle cx="38" cy="46" r="4"/><circle cx="74" cy="56" r="4"/><circle cx="108" cy="36" r="3.5"/><circle cx="140" cy="62" r="3.5"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Page 1: Home -->
+<div id="home">
+  <header class="head">
+    <svg class="branch tl" aria-hidden="true"><use href="#branch"/></svg>
+    <svg class="branch tr" aria-hidden="true"><use href="#branch"/></svg>
+    <img id="portrait" class="portrait" alt="" width="118" height="118">
+    <h1 class="title">In Memory of <span id="title-name"></span></h1>
+    <p id="tagline" class="tagline"></p>
+    <div class="lights" aria-hidden="true"></div>
+    <p id="quote" class="quote"></p>
+    <p class="counts"><span id="count-memories">0</span> notes shared <i aria-hidden="true">&bull;</i> <span id="count-photos">0</span> photos shared</p>
+  </header>
+
+  <main id="main">
+    <section class="block" aria-labelledby="notes-title">
+      <h2 id="notes-title">Remembering <span class="js-name"></span> &hellip;</h2>
+      <p id="invite" class="invite"></p>
+      <div class="tools">
+        <div class="field">
+          <label for="search">Search notes</label>
+          <input id="search" type="search" placeholder="Name, relationship or words" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="sort">Sort by</label>
+          <select id="sort">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </div>
+      </div>
+      <p id="wall-status" class="hint" role="status" aria-live="polite"></p>
+      <div id="wall" class="wall"></div>
+      <p id="wall-empty" class="empty" hidden></p>
+      <button id="more" class="btn btn-ghost" type="button" hidden>Show more notes</button>
+    </section>
+
+    <section class="block" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Moments Shared Together</h2>
+      <div id="gallery" class="gallery"></div>
+      <p id="gallery-empty" class="empty" hidden>No photos yet. Add one with your note.</p>
+      <button id="more-photos" class="btn btn-ghost" type="button" hidden>Show more photos</button>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="candle" aria-hidden="true"><i class="flame"></i></div>
+    <p class="foot-quote">Those we love never truly leave us.</p>
+    <p id="foot-name" class="hint"></p>
+  </footer>
+
+  <a id="fab" class="fab" href="#add" aria-label="Add note"><span aria-hidden="true">+</span> Add note</a>
+</div>
+
+<!-- Page 2: Add note -->
+<section id="add-view" class="add" hidden aria-labelledby="add-title">
+  <a class="back" href="#home">&larr; Back to notes</a>
+  <form id="memory-form" class="paper form" novalidate>
+    <h1 id="add-title" class="add-title">Add a note for <span class="js-name"></span></h1>
+    <div class="field">
+      <label for="f-name">Your name</label>
+      <input id="f-name" name="name" type="text" minlength="2" maxlength="100" required autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="f-rel">Relationship</label>
+      <select id="f-rel" name="relationship">
+        <option>Friend</option><option>Family</option><option>Classmate</option>
+        <option>Colleague</option><option>Teacher</option><option>Neighbor</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field wide">
+      <label for="f-memory">Your note</label>
+      <textarea id="f-memory" name="memory" rows="6" minlength="20" maxlength="2000" required aria-describedby="counter"></textarea>
+      <small id="counter" class="hint">0 / 2000 (at least 20)</small>
+    </div>
+    <div class="field">
+      <label for="f-photo">Memorable photo (optional)</label>
+      <input id="f-photo" name="photo" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+      <small class="hint">JPG, PNG or WEBP, up to 5MB</small>
+    </div>
+    <div class="field">
+      <label for="f-caption">Photo caption (optional)</label>
+      <input id="f-caption" name="photo_caption" type="text" maxlength="200" placeholder="College farewell 2025">
+    </div>
+    <div class="wide actions">
+      <button class="btn" type="submit" id="submit">Submit Note</button>
+      <p id="form-msg" class="form-msg" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lb-btn lb-close" type="button" aria-label="Close photo viewer">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">&#8249;</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo">&#8250;</button>
+  <figure class="lb-fig">
+    <img id="lb-img" alt="">
+    <figcaption>
+      <p id="lb-cap" class="lb-cap"></p>
+      <p id="lb-by" class="lb-by"></p>
+      <p id="lb-text" class="lb-text"></p>
+      <p id="lb-date" class="hint"></p>
+    </figcaption>
+  </figure>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

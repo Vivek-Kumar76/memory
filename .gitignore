@@ -1,0 +1,6 @@
+   task
+   .task/
+   __pycache__/
+   *.pyc
+   backend/database.db
+   backend/uploads/
